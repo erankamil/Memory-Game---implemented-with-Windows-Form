@@ -40,6 +40,9 @@ namespace Ex05.UI
         private void startGame()
         {
             while(m_Control.isEndGame() == false)
+            {
+
+            }
         }
 
         private void initializeCollection()
