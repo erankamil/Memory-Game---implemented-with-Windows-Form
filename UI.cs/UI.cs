@@ -219,7 +219,7 @@ namespace Ex05.UI
                 }
                 else
                 {
-                   winnerName = "The winner is " + m_Control.AnnounceWinner();
+                   winnerName = "The Winner Is " + m_Control.AnnounceWinner();
                 }
 
                 msg.AppendFormat(@"Score Board:
