@@ -79,7 +79,15 @@ namespace Ex05.UI
         private void initializePlayers(out Player o_PlayerOne, out Player o_PlayerTwo)
         {
             o_PlayerOne = new Player(m_FormSettings.FirstPlayerName, Color.LightGreen);
-            o_PlayerTwo = new Player(m_FormSettings.SecondPlayerName, Color.LightBlue);
+            if (m_FormSettings.SecondPlayerName == "-computer-")
+            {
+                o_PlayerTwo = new Player(m_FormSettings.SecondPlayerName, Color.LightBlue, m_FormSettings.Height,
+                    m_FormSettings.Width);
+            }
+            else
+            {
+                o_PlayerTwo = new Player(m_FormSettings.SecondPlayerName, Color.LightBlue);
+            }
         }
 
         private void buttonCard_Click(object sender, EventArgs e)
@@ -121,12 +129,11 @@ namespace Ex05.UI
             System.Threading.Thread.Sleep(1000);
             int firstX, firstY, secondX, secondY;
             m_Control.GetComputerMove(out firstX, out firstY);
-            m_Control.GetComputerMove(out secondX, out secondY);
-
-            if (secondX == firstX && secondY == firstY)
+            do
             {
                 m_Control.GetComputerMove(out secondX, out secondY);
             }
+            while (secondX == firstX && secondY == firstY);
 
             showGameCard(firstX, firstY);
             System.Threading.Thread.Sleep(1000);

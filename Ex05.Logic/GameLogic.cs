@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Drawing;
 using System.Threading.Tasks;
 
 namespace Ex05.Logic
@@ -114,6 +115,10 @@ namespace Ex05.Logic
                 addScore(io_CurrentPlayer);
                 m_GameBoard.Matrix[i_FirstCellRow, i_FirstCellCol].IsOpen = true;          
                 m_GameBoard.Matrix[i_SecondCellRow, i_SecondCellCol].IsOpen = true;
+                if(m_SecondPlayer.Name == "-computer-")
+                {
+                    m_SecondPlayer.UpdateCompterRandMoves(i_FirstCellRow, i_FirstCellCol, i_SecondCellRow, i_SecondCellCol);
+                }
             }
             else
             {
@@ -198,17 +203,24 @@ namespace Ex05.Logic
             }
         }
 
+        //public void GetComputerMove(out int io_X, out int io_Y)
+        //{
+        //    string choiceStr;
+        //    int NumOfRows = Board.Rows;
+        //    int NumOfCols = Board.Cols;
+        //    do
+        //    {
+        //        choiceStr = PlayerTwo.RandMove(NumOfRows, NumOfCols);
+        //        strInputToIndexes(choiceStr, out io_X, out io_Y);
+        //    }
+        //    while (checkBoardCellState(io_X, io_Y));
+        //}
+
         public void GetComputerMove(out int io_X, out int io_Y)
         {
-            string choiceStr;
-            int NumOfRows = Board.Rows;
-            int NumOfCols = Board.Cols;
-            do
-            {
-                choiceStr = PlayerTwo.RandMove(NumOfRows, NumOfCols);
-                strInputToIndexes(choiceStr, out io_X, out io_Y);
-            }
-            while (checkBoardCellState(io_X, io_Y));
+            Point randPoint = PlayerTwo.RandMove();
+            io_X = randPoint.X;
+            io_Y = randPoint.Y;
         }
 
 
