@@ -27,7 +27,8 @@ namespace Ex05.UI
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
+        private void InitializeComponent(Ex05.Logic.Player i_FirstPlayer,
+            Ex05.Logic.Player i_SecondPlayer)
         {
             this.MaximizeBox = false;
             this.labelCurrentPlayer = new System.Windows.Forms.Label();
@@ -41,11 +42,11 @@ namespace Ex05.UI
             this.labelCurrentPlayer.Location = new System.Drawing.Point(38, 390);
             this.labelCurrentPlayer.Name = "labelCurrentPlayer";
             this.labelCurrentPlayer.Size = new System.Drawing.Size(79, 13);
-            this.labelCurrentPlayer.Left = marginBorders;
+            this.labelCurrentPlayer.Left = k_Borders;
             this.labelCurrentPlayer.ForeColor = Color.Black;
-            this.labelCurrentPlayer.BackColor = r_FirstPlayerColor;
-            this.labelCurrentPlayer.Top = m_GameCards[0, m_GameCards.GetLength(1) - 1].Bottom + marginBorders;
-            this.labelCurrentPlayer.Text = string.Format("Current Player: {0}", m_FirstPlayerName);
+            this.labelCurrentPlayer.BackColor = i_FirstPlayer.myColor;
+            this.labelCurrentPlayer.Top = m_GameCards[0, m_GameCards.GetLength(1) - 1].Bottom + k_Borders;
+            this.labelCurrentPlayer.Text = string.Format("Current Player: {0}", i_FirstPlayer.Name);
             this.labelFirstPlayerScore.TabIndex = 0;
             // 
             // labelFirstPlayerScore
@@ -55,11 +56,11 @@ namespace Ex05.UI
             this.labelFirstPlayerScore.Name = "labelFirstPlayerScore";
             this.labelFirstPlayerScore.Size = new System.Drawing.Size(35, 13);
             this.labelFirstPlayerScore.TabIndex = 1;
-            this.labelFirstPlayerScore.Text = string.Format("{0}: {1} Pairs", m_FirstPlayerName, m_FirstPlayerScore); 
+            this.labelFirstPlayerScore.Text = string.Format("{0}: {1} Pairs", i_FirstPlayer.Name, i_FirstPlayer.Score); 
             this.labelFirstPlayerScore.ForeColor = Color.Black;
-            this.labelFirstPlayerScore.BackColor = r_FirstPlayerColor;
-            this.labelFirstPlayerScore.Left = marginBorders;
-            this.labelFirstPlayerScore.Top = this.labelCurrentPlayer.Bottom + marginBorders;
+            this.labelFirstPlayerScore.BackColor = i_FirstPlayer.myColor;
+            this.labelFirstPlayerScore.Left = k_Borders;
+            this.labelFirstPlayerScore.Top = this.labelCurrentPlayer.Bottom + k_Borders;
             // 
             // labelSecondPlayerScore
             // 
@@ -68,17 +69,17 @@ namespace Ex05.UI
             this.labelSecondPlayerScore.Name = "labelSecondPlayerScore";
             this.labelSecondPlayerScore.Size = new System.Drawing.Size(35, 13);
             this.labelSecondPlayerScore.TabIndex = 2;
-            this.labelSecondPlayerScore.Text = string.Format("{0}: {1} Pairs", m_SecondPlayerName, m_SecondPlayerScore);
+            this.labelSecondPlayerScore.Text = string.Format("{0}: {1} Pairs", i_SecondPlayer.Name, i_SecondPlayer.Score);
             this.labelSecondPlayerScore.ForeColor = Color.Black;
-            this.labelSecondPlayerScore.BackColor = r_SecondPlayerColor;
-            this.labelSecondPlayerScore.Left = marginBorders;
-            this.labelSecondPlayerScore.Top = this.labelFirstPlayerScore.Bottom + marginBorders;
+            this.labelSecondPlayerScore.BackColor = i_SecondPlayer.myColor;
+            this.labelSecondPlayerScore.Left = k_Borders;
+            this.labelSecondPlayerScore.Top = this.labelFirstPlayerScore.Bottom + k_Borders;
             // 
             // FormGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new Size(m_GameCards[m_GameCards.GetLength(0) - 1, m_GameCards.GetLength(1) - 1].Right + marginBorders, this.labelSecondPlayerScore.Bottom + marginBorders);
+            this.ClientSize = new Size(m_GameCards[m_GameCards.GetLength(0) - 1, m_GameCards.GetLength(1) - 1].Right + k_Borders, this.labelSecondPlayerScore.Bottom + k_Borders);
             this.Controls.Add(this.labelSecondPlayerScore);
             this.Controls.Add(this.labelFirstPlayerScore);
             this.Controls.Add(this.labelCurrentPlayer);

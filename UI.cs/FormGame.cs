@@ -7,42 +7,56 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Ex05.Logic;
 
 namespace Ex05.UI
 {
     public partial class FormGame : Form
     {
-        string m_FirstPlayerName;
-        string m_SecondPlayerName = "computer";
-        uint m_FirstPlayerScore;
-        uint m_SecondPlayerScore;
         GameCard[,] m_GameCards;
-        readonly Color r_FirstPlayerColor = Color.LightBlue;
-        readonly Color r_SecondPlayerColor = Color.LightGreen;
-        const int marginBorders = 12;
-        const int squareCardSize = 80;
+        const int k_Borders = 12;
+        const int K_CardSize = 80;
 
-
-        public FormGame(int i_Height, int i_Widht, string i_FirstPlayerName, string i_SecondPlayerName = null)
+        public FormGame(int i_Height, int i_Widht, Player i_FirstPlayer, Player i_SecondPlayer)
         {
-            m_FirstPlayerName = i_FirstPlayerName;
-            if (i_SecondPlayerName != null)
-            {
-                m_SecondPlayerName = i_SecondPlayerName;
-            }
             initializeGameCards(i_Height, i_Widht);
-            InitializeComponent();
-
+            InitializeComponent(i_FirstPlayer, i_SecondPlayer);
         }
 
         public GameCard[,] GameCards
         {
-            get { return m_GameCards; }
+            get
+            {
+                return m_GameCards;
+            }
+        }
+
+        public Label CurrentPlayer
+        {
+            get
+            {
+                return this.labelCurrentPlayer;
+            }
+        }
+
+        public Label FirstPlayerScore
+        {
+            get
+            {
+                return this.labelFirstPlayerScore;
+            }
+        }
+
+        public Label SecondPlayerScore
+        {
+            get
+            {
+                return this.labelSecondPlayerScore;
+            }
         }
 
         private void initializeGameCards(int i_Height, int i_Widht)
         {
-
             m_GameCards = new GameCard[i_Height, i_Widht];
             for (int i = 0; i < i_Height; i++)
             {
@@ -50,9 +64,9 @@ namespace Ex05.UI
                 {
                     m_GameCards[i, j] = new GameCard(i, j);
                     m_GameCards[i, j].BackgroundImageLayout = ImageLayout.Stretch;
-                    m_GameCards[i, j].Size = new Size(squareCardSize, squareCardSize);
-                    m_GameCards[i, j].Left = (i * (squareCardSize + marginBorders)) + marginBorders;
-                    m_GameCards[i, j].Top = (j * (squareCardSize + marginBorders)) + marginBorders;
+                    m_GameCards[i, j].Size = new Size(K_CardSize, K_CardSize);
+                    m_GameCards[i, j].Left = (i * (K_CardSize + k_Borders)) + k_Borders;
+                    m_GameCards[i, j].Top = (j * (K_CardSize + k_Borders)) + k_Borders;
                     this.Controls.Add(m_GameCards[i, j]);
                 }
             }

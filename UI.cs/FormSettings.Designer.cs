@@ -71,6 +71,7 @@
             this.textBoxFirstPlayer.Name = "textBoxFirstPlayer";
             this.textBoxFirstPlayer.Size = new System.Drawing.Size(120, 20);
             this.textBoxFirstPlayer.TabIndex = 3;
+            this.textBoxFirstPlayer.Text = null;
             // 
             // textBoxSecondPlayer
             // 
@@ -80,7 +81,7 @@
             this.textBoxSecondPlayer.Name = "textBoxSecondPlayer";
             this.textBoxSecondPlayer.Size = new System.Drawing.Size(120, 20);
             this.textBoxSecondPlayer.TabIndex = 4;
-            this.textBoxSecondPlayer.Text = "computer";
+            this.textBoxSecondPlayer.Text = "-computer-";
             // 
             // buttonAgainstPlayer
             // 

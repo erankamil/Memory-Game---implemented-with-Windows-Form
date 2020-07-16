@@ -15,6 +15,5 @@ namespace Ex05.UI
             UI ui = new UI();
             ui.Run();
         }
-        
     }
 }

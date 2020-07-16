@@ -14,6 +14,7 @@ namespace Ex05.UI
     {
         private int m_Height = 4;
         private int m_Width = 4;
+
         public FormSettings()
         {
             InitializeComponent();
@@ -21,37 +22,64 @@ namespace Ex05.UI
 
         public Button ButtonStart
         {
-            get { return this.buttonStart; }
+            get
+            {
+                return this.buttonStart;
+            }
         }
 
         public Button BottonFormSize
         {
-            get { return this.buttonBoardSize; }
+            get
+            {
+                return this.buttonBoardSize;
+            }
         }
 
         public string FirstPlayerName
         {
-            get {return textBoxFirstPlayer.Text;  }
+            get
+            {
+                return textBoxFirstPlayer.Text;
+            }
+            set
+            {
+                textBoxFirstPlayer.Text = value;
+            }
         }
+
         public string SecondPlayerName
         {
-            get { return textBoxSecondPlayer.Text; }
+            get
+            {
+                return textBoxSecondPlayer.Text;
+            }
+            set
+            {
+              textBoxSecondPlayer.Text = value;
+            }
         }
 
         public int Width
         {
-            get { return this.m_Width; }
+            get
+            {
+                return this.m_Width;
+            }
         }
 
         public int Height
         {
-            get { return this.m_Height; }
+            get
+            {
+                return this.m_Height;
+            }
         }
 
         private void buttonAgainstPlayer_Click_1(object sender, EventArgs e)
         {
             textBoxSecondPlayer.Enabled = true;
-            textBoxSecondPlayer.Text = " ";
+            textBoxSecondPlayer.Text = "";
             textBoxSecondPlayer.BackColor = Color.White;
             buttonAgainstPlayer.Text = "Against Computer";
             this.buttonAgainstPlayer.Click -= buttonAgainstPlayer_Click_1;
@@ -66,7 +94,6 @@ namespace Ex05.UI
             buttonAgainstPlayer.Text = "Against A Friend";
             this.buttonAgainstPlayer.Click -= buttonAgainstPlayer_Click_2;
             this.buttonAgainstPlayer.Click += new System.EventHandler(this.buttonAgainstPlayer_Click_1);
-
         }
 
         private void buttonBoardSize_Click(object sender, EventArgs e)
@@ -115,6 +142,5 @@ namespace Ex05.UI
                     break;
             }
         }
-
     }
 }
