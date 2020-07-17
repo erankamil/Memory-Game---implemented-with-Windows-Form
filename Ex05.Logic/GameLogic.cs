@@ -203,31 +203,11 @@ namespace Ex05.Logic
             }
         }
 
-        //public void GetComputerMove(out int io_X, out int io_Y)
-        //{
-        //    string choiceStr;
-        //    int NumOfRows = Board.Rows;
-        //    int NumOfCols = Board.Cols;
-        //    do
-        //    {
-        //        choiceStr = PlayerTwo.RandMove(NumOfRows, NumOfCols);
-        //        strInputToIndexes(choiceStr, out io_X, out io_Y);
-        //    }
-        //    while (checkBoardCellState(io_X, io_Y));
-        //}
-
         public void GetComputerMove(out int io_X, out int io_Y)
         {
             Point randPoint = PlayerTwo.RandMove();
             io_X = randPoint.X;
             io_Y = randPoint.Y;
-        }
-
-
-        private void strInputToIndexes(string i_InputStr, out int o_Row, out int o_Col)
-        {
-            o_Col = i_InputStr[0] - 'A';
-            o_Row = i_InputStr[1] - '1';
         }
 
         private bool checkBoardCellState(int i_Row, int i_Col)

@@ -76,14 +76,6 @@ namespace Ex05.Logic
             }
         }
 
-        //public string RandMove(int i_Row, int i_Col)
-        //{
-        //    int row = m_Rand.Next(1, i_Row);
-        //    char col = Convert.ToChar(m_Rand.Next(1, i_Col) + 'A');
-        //    string choice = string.Format("{0}{1}", col, row);
-        //    return choice;
-        //}
-
         public Point RandMove()
         {
             int maxIndex = m_RandMoveOptions.Count;
