@@ -21,7 +21,7 @@ namespace Ex05.Logic
             {
                 for (int j = 0; j < i_Cols; j++)
                 {
-                    m_Matrix[i, j] = new Cell();
+                    m_Matrix[i, j] = new Cell(i, j);
                 }
             }
         }

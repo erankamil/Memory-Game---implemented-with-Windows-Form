@@ -71,7 +71,6 @@
             this.textBoxFirstPlayer.Name = "textBoxFirstPlayer";
             this.textBoxFirstPlayer.Size = new System.Drawing.Size(120, 20);
             this.textBoxFirstPlayer.TabIndex = 3;
-            this.textBoxFirstPlayer.Text = null;
             // 
             // textBoxSecondPlayer
             // 
@@ -97,9 +96,10 @@
             // buttonStart
             // 
             this.buttonStart.BackColor = System.Drawing.Color.Lime;
-            this.buttonStart.Location = new System.Drawing.Point(332, 178);
+            this.buttonStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonStart.Location = new System.Drawing.Point(301, 164);
             this.buttonStart.Name = "buttonStart";
-            this.buttonStart.Size = new System.Drawing.Size(98, 35);
+            this.buttonStart.Size = new System.Drawing.Size(106, 46);
             this.buttonStart.TabIndex = 6;
             this.buttonStart.Text = "Start!";
             this.buttonStart.UseVisualStyleBackColor = false;
@@ -107,6 +107,7 @@
             // buttonBoardSize
             // 
             this.buttonBoardSize.BackColor = System.Drawing.Color.Violet;
+            this.buttonBoardSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonBoardSize.Location = new System.Drawing.Point(62, 164);
             this.buttonBoardSize.Name = "buttonBoardSize";
             this.buttonBoardSize.Size = new System.Drawing.Size(110, 63);
@@ -120,7 +121,7 @@
             this.AcceptButton = this.buttonStart;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(558, 276);
+            this.ClientSize = new System.Drawing.Size(471, 259);
             this.Controls.Add(this.buttonBoardSize);
             this.Controls.Add(this.buttonStart);
             this.Controls.Add(this.buttonAgainstPlayer);
@@ -129,6 +130,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormSettings";

@@ -10,10 +10,19 @@ namespace Ex05.Logic
     {
         private int m_Key;
         private bool m_IsOpened;
+        private int m_X;
+        private int m_Y;
 
         public Cell()
         {
             m_Key = 0;
+            m_IsOpened = false;
+        }
+
+        public Cell(int i_X, int i_Y)
+        {
+            m_X = i_X;
+            m_Y = i_Y;
             m_IsOpened = false;
         }
 
@@ -27,6 +36,29 @@ namespace Ex05.Logic
             set
             {
                 m_Key = value;
+            }
+        }
+        public int X
+        {
+            get
+            {
+                return m_X;
+            }
+            set
+            {
+                m_X = value;
+            }
+        }
+        public int Y
+        {
+            get
+            {
+
+                return m_Y;
+            }
+            set
+            {
+                m_Y = value;
             }
         }
 

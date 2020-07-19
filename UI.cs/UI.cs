@@ -39,16 +39,13 @@ namespace Ex05.UI
             {
                 if (!String.IsNullOrEmpty(m_FormSettings.SecondPlayerName))
                 {
-                    Player playerOne, playerTwo;
-
                     if (m_Control != null)
                     {
                         m_Control.UpdatePlayersNames(m_FormSettings.FirstPlayerName, m_FormSettings.SecondPlayerName);
                         updatePlayersLabels();
                     }
 
-                    initializePlayers(out playerOne, out playerTwo);
-                    m_Control = new GameLogic(m_FormSettings.Height, m_FormSettings.Width, playerOne, playerTwo);
+                    m_Control = new GameLogic(m_FormSettings.Height, m_FormSettings.Width, m_FormSettings.FirstPlayerName, Color.LightGreen, m_FormSettings.SecondPlayerName,Color.LightBlue);
                     initializeFormGame(m_Control.PlayerOne, m_Control.PlayerTwo);
                     m_FormSettings.Hide();
                     m_FormGame.ShowDialog();
@@ -73,20 +70,6 @@ namespace Ex05.UI
                 {
                     m_FormGame.GameCards[i, j].Click += buttonCard_Click;
                 }
-            }
-        }
-
-        private void initializePlayers(out Player o_PlayerOne, out Player o_PlayerTwo)
-        {
-            o_PlayerOne = new Player(m_FormSettings.FirstPlayerName, Color.LightGreen);
-            if (m_FormSettings.SecondPlayerName == "-computer-")
-            {
-                o_PlayerTwo = new Player(m_FormSettings.SecondPlayerName, Color.LightBlue, m_FormSettings.Height,
-                    m_FormSettings.Width);
-            }
-            else
-            {
-                o_PlayerTwo = new Player(m_FormSettings.SecondPlayerName, Color.LightBlue);
             }
         }
 
@@ -128,12 +111,7 @@ namespace Ex05.UI
         {
             System.Threading.Thread.Sleep(1000);
             int firstX, firstY, secondX, secondY;
-            m_Control.GetComputerMove(out firstX, out firstY);
-            do
-            {
-                m_Control.GetComputerMove(out secondX, out secondY);
-            }
-            while (secondX == firstX && secondY == firstY);
+            m_Control.GetComputerMove(out firstX, out firstY, out secondX, out secondY);
 
             showGameCard(firstX, firstY);
             System.Threading.Thread.Sleep(1000);
@@ -165,8 +143,8 @@ namespace Ex05.UI
             int firstKey = m_Control.Board.Matrix[i_X, i_Y].Key;
             Image data;
             m_Collection.TryGetValue(firstKey, out data);
-            m_FormGame.GameCards[i_X, i_Y].Enabled = false;
             m_FormGame.GameCards[i_X, i_Y].BackgroundImage = data;
+            m_FormGame.GameCards[i_X, i_Y].Enabled = false;
             m_FormGame.GameCards[i_X, i_Y].Update();
         }
 
@@ -258,10 +236,8 @@ Restart Game?",m_Control.PlayerOne.Name, m_Control.PlayerOne.Score, m_Control.Pl
             m_FormGame.Hide();
             initializeCollection();
             m_Control.ClearPlayersScore();
-            m_Control.RestartGame();
-            m_FormSettings.Show();
             m_CurrentPlayerTurn = ePlayerTurn.playerOne;
-
+            m_FormSettings.Show();
         }
 
         private void initializeCollection()

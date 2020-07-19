@@ -13,20 +13,15 @@ namespace Ex05.Logic
         private Player m_SecondPlayer;
         private Board m_GameBoard;
         private int m_NumOfOpenedPairs;
-        private eGameType m_GameType = eGameType.againstFriend;
+        private eGameType m_GameType;
 
-        public GameLogic(int i_Rows, int i_Cols, Player i_FirstPlayer, Player i_SecondPlayer)
+        public GameLogic(int i_Rows, int i_Cols, string i_FirstPlayerName, Color i_firstPlayerColor, string i_SecondPlayerName, Color i_SecondPlayerColor)
         {
             m_GameBoard = new Board(i_Rows, i_Cols);
             initializeLogicBoard();
-            m_FirstPlayer = i_FirstPlayer;
-            m_SecondPlayer = i_SecondPlayer;
-            if (m_SecondPlayer.Name == "-computer-")
-            {
-                m_GameType = eGameType.againstComputer;
-            }
-
             mix();
+            initializePlayers(i_FirstPlayerName, i_firstPlayerColor, i_SecondPlayerName, i_SecondPlayerColor);
+
         }
 
         public Player PlayerOne
@@ -66,6 +61,21 @@ namespace Ex05.Logic
             get
             {
                 return m_NumOfOpenedPairs;
+            }
+        }
+
+        private void initializePlayers(string i_FirstPlayerName, Color i_firstPlayerColor, string i_SecondPlayerName, Color i_SecondPlayerColor)
+        {
+            m_FirstPlayer = new Player(i_FirstPlayerName, i_firstPlayerColor);
+            if(i_SecondPlayerName == "-computer-")
+            {
+                m_SecondPlayer = new ComputerPlayer(i_SecondPlayerName, i_SecondPlayerColor, m_GameBoard);
+                m_GameType = eGameType.againstComputer;
+            }
+            else
+            {
+                m_SecondPlayer = new Player(i_SecondPlayerName, i_SecondPlayerColor);
+                m_GameType = eGameType.againstFriend;
             }
         }
 
@@ -109,7 +119,7 @@ namespace Ex05.Logic
             bool isMatch = m_GameBoard.Matrix[i_FirstCellRow, i_FirstCellCol].Key ==
                 m_GameBoard.Matrix[i_SecondCellRow, i_SecondCellCol].Key;
 
-            if (isMatch)
+            if (isMatch == true)
             {
                 m_NumOfOpenedPairs++;
                 addScore(io_CurrentPlayer);
@@ -117,12 +127,16 @@ namespace Ex05.Logic
                 m_GameBoard.Matrix[i_SecondCellRow, i_SecondCellCol].IsOpen = true;
                 if(m_SecondPlayer.Name == "-computer-")
                 {
-                    m_SecondPlayer.UpdateCompterRandMoves(i_FirstCellRow, i_FirstCellCol, i_SecondCellRow, i_SecondCellCol);
+                    (m_SecondPlayer as ComputerPlayer).UpdateComputerMoves(m_GameBoard.Matrix[i_FirstCellRow, i_FirstCellCol], m_GameBoard.Matrix[i_SecondCellRow, i_SecondCellCol]);
                 }
             }
             else
             {
                 passTurn(ref io_CurrentPlayer);
+                if (m_SecondPlayer.Name == "-computer-")
+                {
+                    (m_SecondPlayer as ComputerPlayer).AddToCache(m_GameBoard.Matrix[i_FirstCellRow, i_FirstCellCol], m_GameBoard.Matrix[i_SecondCellRow, i_SecondCellCol]);
+                }
             }
 
             return isMatch;
@@ -143,16 +157,6 @@ namespace Ex05.Logic
             }
         }
         
-        public void RestartGame()
-        {
-            for (int i = 0; i < m_GameBoard.Rows; i++)
-            {
-                for (int j = 0; j < m_GameBoard.Cols; j++)
-                {
-                    m_GameBoard.Matrix[i, j].IsOpen = false;
-                }
-            }
-        }
 
         public void UpdatePlayersNames(string i_PlayerOneName, string i_PlayerTwoName) 
         {
@@ -160,7 +164,7 @@ namespace Ex05.Logic
             if(i_PlayerTwoName == "-computer-")
             {
                 m_GameType = eGameType.againstComputer;
-                m_SecondPlayer = new Player(i_PlayerTwoName, m_SecondPlayer.myColor);
+                m_SecondPlayer = new ComputerPlayer(i_PlayerTwoName, m_SecondPlayer.myColor, m_GameBoard);
             }
             else
             {
@@ -203,11 +207,32 @@ namespace Ex05.Logic
             }
         }
 
-        public void GetComputerMove(out int io_X, out int io_Y)
+        public void GetComputerMove(out int io_FirstX, out int io_FirstY, out int io_SecondX, out int io_SecondY)
         {
-            Point randPoint = PlayerTwo.RandMove();
-            io_X = randPoint.X;
-            io_Y = randPoint.Y;
+            Cell firstMove, secondMove;
+            ComputerPlayer playerTwo = (PlayerTwo as ComputerPlayer);
+            if (playerTwo.CheckPairInCache(out firstMove, out secondMove) == false)
+            {
+                if (playerTwo.RandOptions.Count > 2)
+                {
+                    (PlayerTwo as ComputerPlayer).RandMove(out firstMove);
+                    do
+                    {
+                        (PlayerTwo as ComputerPlayer).RandMove(out secondMove);
+                    }
+                    while (firstMove == secondMove);
+                }
+                else // in case only one pair left in the board
+                {
+                    firstMove = playerTwo.RandOptions[0];
+                    secondMove = playerTwo.RandOptions[1];
+                }
+            }
+
+            io_FirstX = firstMove.X;
+            io_FirstY = firstMove.Y;
+            io_SecondX = secondMove.X;
+            io_SecondY = secondMove.Y;
         }
 
         private bool checkBoardCellState(int i_Row, int i_Col)

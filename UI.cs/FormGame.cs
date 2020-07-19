@@ -73,7 +73,6 @@ namespace Ex05.UI
         }
     }
 
-
     public class GameCard : Button
     {
         private int m_X;
@@ -84,6 +83,11 @@ namespace Ex05.UI
         {
             m_X = i_X;
             m_Y = i_Y;
+            //m_Image = new PictureBox();
+            //m_Image.Top = this.Top + 7;
+            //m_Image.Left = this.Left + 7;
+            //m_Image.Size = new Size(65, 65);
+            //m_Image.SizeMode = PictureBoxSizeMode.StretchImage;
         }
 
         public int X
@@ -122,4 +126,5 @@ namespace Ex05.UI
             }
         }
     }
+
 }
